@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "LIKE_TABLE")
 public class Like {
 
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -21,4 +22,9 @@ public class Like {
 
     @OneToOne
     private Board board;
+
+    public Like(Board board, Member member) {
+        this.board = board;
+        this.member = member;
+    }
 }
