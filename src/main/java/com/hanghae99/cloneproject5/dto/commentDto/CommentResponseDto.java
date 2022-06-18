@@ -1,4 +1,4 @@
-package com.hanghae99.cloneproject5.dto;
+package com.hanghae99.cloneproject5.dto.commentDto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -12,4 +12,5 @@ public class CommentResponseDto {
     private String username;
     private String content;
     private String createdAt;
+
 }

@@ -1,6 +1,6 @@
 package com.hanghae99.cloneproject5.model;
 
-import com.hanghae99.cloneproject5.dto.CommentRegisterDto;
+import com.hanghae99.cloneproject5.dto.commentDto.CommentRequestDto;
 import com.hanghae99.cloneproject5.util.Timestamp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +33,7 @@ public class Comment extends Timestamp {
         this.member = member;
     }
 
-    public void update(CommentRegisterDto registerDto) {
+    public void update(CommentRequestDto registerDto) {
 
         this.content = registerDto.getContent();
     }
