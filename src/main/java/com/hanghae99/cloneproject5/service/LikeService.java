@@ -62,6 +62,23 @@ public class LikeService {
         likeRepository.delete(like);
     }
 
+//    public LikeResponseDto createOrDeleteLike (Long boardId, UserDetailsImpl userDetails) {
+//        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("createOrDeleteLike ID 오류"));
+//        Member member = userDetails.getUser();
+//        Optional<Like> like = likeRepository.findByBoardAndMember(board, member);
+//        if (like.isPresent()) {
+//            likeRepository.delete(like.get());
+//            //board.updateLikeCount(board.getLikeCount()-1L);
+//            boardRepository.save(board);
+//            return new LikeResponseDto(false, board.getlikeCount);
+//        }
+//        Like newLike = new Like(board, member);
+//        likeRepository.save(newLike);
+//        board.updateLikeCount(board.getLikeCount()+1L);
+//        boardRepository.save(board);
+//        return new LikeResponseDto(true, board.getLikeCount());
+//    }
+
     public LikeResponseDto getBoardsLike(Long boardId) {
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("getBoardLike ID 오류"));
 
