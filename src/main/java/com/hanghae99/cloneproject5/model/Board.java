@@ -1,5 +1,7 @@
 package com.hanghae99.cloneproject5.model;
 
+import com.hanghae99.cloneproject5.dto.BoardRequestDto;
+import com.hanghae99.cloneproject5.dto.BoardUpdateDto;
 import com.hanghae99.cloneproject5.util.Timestamp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,4 +33,31 @@ public class Board extends Timestamp {
 
     @ManyToOne
     private Member member;
+
+    @Column
+    private String username;
+
+    @Column
+    private String tagString;
+
+    public Board(BoardRequestDto requestDto, String username, Tag tag){
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.contentSummary = requestDto.getContentSummary();
+
+        this.username = username;
+    }
+    public Board(BoardRequestDto requestDto, String username){
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.contentSummary = requestDto.getContentSummary();
+
+        this.username = username;
+    }
+
+    public void update(BoardUpdateDto updateDto) {
+        this.title = updateDto.getTitle();
+        this.content = updateDto.getContent();
+        this.contentSummary = updateDto.getContentSummary();
+    }
 }
