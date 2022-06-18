@@ -32,6 +32,7 @@ public class LikeService {
             }
         }
 
+        // test code
         Optional<Member> member = memberRepository.findById(1L);
         if (!member.isPresent()) {
             try {
