@@ -1,9 +1,9 @@
 package com.hanghae99.cloneproject5.validation;
 
-import com.hanghae99.cloneproject5.dto.CommentRegisterDto;
+import com.hanghae99.cloneproject5.dto.commentDto.CommentRequestDto;
 
 public class CommentValidation {
-    public static void validationCommentRegister(CommentRegisterDto registerDto) {
+    public static void validationCommentRegister(CommentRequestDto registerDto) {
         String content = registerDto.getContent();
 
         if (content.trim().isEmpty()) {

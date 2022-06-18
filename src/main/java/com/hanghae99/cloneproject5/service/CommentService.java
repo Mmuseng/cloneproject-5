@@ -1,7 +1,6 @@
 package com.hanghae99.cloneproject5.service;
 
-import com.hanghae99.cloneproject5.dto.CommentRegisterDto;
-import com.hanghae99.cloneproject5.dto.CommentRegisterResponseDto;
+import com.hanghae99.cloneproject5.dto.commentDto.CommentRequestDto;
 import com.hanghae99.cloneproject5.model.Board;
 import com.hanghae99.cloneproject5.model.Comment;
 import com.hanghae99.cloneproject5.repository.BoardRepository;
@@ -26,7 +25,7 @@ public class CommentService {
     //Board board = boardRepository.findbyId(boardId).orElseThrow(() -> new NullPointerException("registerComment ID를 찾을 수 없습니다."));
 
     @Transactional
-    public void updateComment(Long commentId, CommentRegisterDto registerDto) {
+    public void updateComment(Long commentId, CommentRequestDto registerDto) {
 
         Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("updateComment ID를 찾을 수 없습니다."));
 
