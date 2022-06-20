@@ -17,10 +17,12 @@ public class Like {
     @Id
     private Long id;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "memberId", nullable = false)
     private Member member;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "boardId", nullable = false)
     private Board board;
 
     public Like(Board board, Member member) {

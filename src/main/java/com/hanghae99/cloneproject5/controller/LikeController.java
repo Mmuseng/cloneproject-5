@@ -1,10 +1,11 @@
 package com.hanghae99.cloneproject5.controller;
 
+import com.hanghae99.cloneproject5.dto.likeDto.LikeDto;
 import com.hanghae99.cloneproject5.service.LikeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RequiredArgsConstructor
 @RestController
@@ -12,9 +13,21 @@ public class LikeController {
 
     private final LikeService likeService;
 
-//    @GetMapping("/like/{boardId}")
-//    public BoardGetLikeResponseDto getLikeResponseDto (@PathVariable Long boardId, @AuthticationPrincipal UserDetailsImpl userDetails) {
-//
-//        return likeService.getBoardsLike(boardId, userDetails);
-//    }
+    //좋아요 등록
+    @PostMapping("/like/{boardId}")
+    public void uplike(HttpServletRequest httpRequest,
+                       @PathVariable Long boardId,
+                       @RequestBody LikeDto behavior) {
+        TokenDecode decode = (TokenDecode) httpRequest.getAttribute("decode");
+        likeService.uplike(decode, boardId, behavior);
+    }
+
+    // 좋아요 조회
+    @GetMapping("/viewlikes/{boardId}")
+    public boolean getlike(@PathVariable Long boardId,
+                           HttpServletRequest httpRequest) {
+        TokenDecode decode = (TokenDecode) httpRequest.getAttribute("decode");
+
+        return likeService.getLike(boardId, decode);
+    }
 }

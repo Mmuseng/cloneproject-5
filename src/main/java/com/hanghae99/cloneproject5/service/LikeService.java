@@ -1,7 +1,6 @@
 package com.hanghae99.cloneproject5.service;
 
-import com.hanghae99.cloneproject5.dto.likeDto.CreateLikeResponseDto;
-import com.hanghae99.cloneproject5.dto.likeDto.LikeResponseDto;
+import com.hanghae99.cloneproject5.dto.likeDto.LikeDto;
 import com.hanghae99.cloneproject5.model.Board;
 import com.hanghae99.cloneproject5.model.Like;
 import com.hanghae99.cloneproject5.model.Member;
@@ -11,8 +10,7 @@ import com.hanghae99.cloneproject5.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -22,69 +20,40 @@ public class LikeService {
     private final MemberRepository memberRepository;
     private final LikeRepository likeRepository;
 
-    public CreateLikeResponseDto createLike (Long boardId) {
-        Optional<Board> board = boardRepository.findById(boardId);
-        if (!board.isPresent()) {
-            try {
-                throw new IllegalAccessException("해당 게시글이 없습니다.");
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
+    @Transactional
+    public void uplike(Long boardId, Long memberId ,LikeDto behavior) { // 토큰 작업시 member - decode
+
+        Member member = memberRepository.findById(memberId).orElseThrow(
+                () -> new NullPointerException("해당 유저가 존재하지 않습니다.")
+        );
+        Board board = boardRepository.findById(boardId).orElseThrow(
+                () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다.")
+        );
+
+        Like like = new Like(member, board);
+
+        if (behavior.getBehavior().equals("like")) {
+            likeRepository.save(like);
+        } else if (behavior.getBehavior().equals("unlike")) {
+            likeRepository.delete(likeRepository.findByBoardAndMember(member, board));
         }
 
-        // test code
-        Optional<Member> member = memberRepository.findById(1L);
-        if (!member.isPresent()) {
-            try {
-                throw new IllegalAccessException("해당 유저가 없습니다.");
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        Optional<Like> likeCheck = likeRepository.findByBoardAndMember(board.get(), member.get());
-        if (likeCheck.isPresent()) {
-            try {
-                throw new IllegalAccessException("이미 좋아요 상태입니다.");
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        Like like = new Like(board.get(), member.get());
-        likeRepository.save(like);
-
-        return new CreateLikeResponseDto(like.getId());
+        Long count = (long) likeRepository.findAllByBoard(board).size();
+        // 좋아요 카운트 - 형준님이랑 의논하긔
+        board.setLikesCnt(count);
     }
 
-    public void deleteLike(Long likeId) {
-        Like like = likeRepository.findById(likeId).orElseThrow(() -> new IllegalArgumentException("deleteLike ID 오류"));
-        likeRepository.delete(like);
+    public boolean getLike(Long boardId, Long memberId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(
+                () -> new NullPointerException("해당 게시글이 없습니다.")
+        );
+
+        Member member = memberRepository.findById(memberId).orElseThrow(
+                () -> new NullPointerException("해당 유저가 존재하지 않습니다.")
+        );
+
+        return likeRepository.existsByBoardAndMember(board, member);
     }
 
-//    public LikeResponseDto createOrDeleteLike (Long boardId, UserDetailsImpl userDetails) {
-//        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("createOrDeleteLike ID 오류"));
-//        Member member = userDetails.getUser();
-//        Optional<Like> like = likeRepository.findByBoardAndMember(board, member);
-//        if (like.isPresent()) {
-//            likeRepository.delete(like.get());
-//            //board.updateLikeCount(board.getLikeCount()-1L);
-//            boardRepository.save(board);
-//            return new LikeResponseDto(false, board.getlikeCount);
-//        }
-//        Like newLike = new Like(board, member);
-//        likeRepository.save(newLike);
-//        board.updateLikeCount(board.getLikeCount()+1L);
-//        boardRepository.save(board);
-//        return new LikeResponseDto(true, board.getLikeCount());
-//    }
 
-    public LikeResponseDto getBoardsLike(Long boardId) {
-        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("getBoardLike ID 오류"));
-
-        List <Like> likeList = likeRepository.findAllByBoard(board);
-        Long listSize = (long) likeList.size();
-
-        return new LikeResponseDto(listSize);
-    }
 }
