@@ -27,7 +27,7 @@ public class CommentService {
     private final MemberRepository memberRepository;
 
 //    public CommentRegisterResponseDto createComment(Long boardId, CommentRegisterDto requestDto, UserDetailsImpl userDetails) {
-//        Board board = boardRepository.findbyId(boardId).orElseThrow(() -> new NullPointerException("registerComment ID를 찾을 수 없습니다."));
+//        Board board = boardRepository.findById(boardId).orElseThrow(() -> new NullPointerException("registerComment ID를 찾을 수 없습니다."));
 //        CommentValidation.validationCommentRegister(requestDto);
 //
 //        Member member = memberRepository.findById(userDetails.getUser().getId()).orElseThrow(("createComment ID 오류"));
