@@ -1,4 +1,4 @@
-package com.hanghae99.cloneproject5.util;
+package com.hanghae99.cloneproject5.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

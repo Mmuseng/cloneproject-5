@@ -1,6 +1,6 @@
 package com.hanghae99.cloneproject5.model;
 
-import com.hanghae99.cloneproject5.util.Timestamp;
+import com.hanghae99.cloneproject5.domain.Timestamp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
