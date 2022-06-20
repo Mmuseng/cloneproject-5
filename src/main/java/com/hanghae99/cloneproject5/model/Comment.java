@@ -22,9 +22,11 @@ public class Comment extends Timestamp {
     private String content;
 
     @ManyToOne
+    @JoinColumn(name = "memberId", nullable = false)
     private Member member;
 
     @ManyToOne
+    @JoinColumn(name = "boardId", nullable = false)
     private Board board;
 
     public Comment(String content, Board board, Member member) {
