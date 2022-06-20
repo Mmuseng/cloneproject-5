@@ -17,7 +17,7 @@ public class Member {
     @Id
     private Long id;
 
-    @Column (nullable = false)
+    @Column (nullable = false, unique = true)
     private String email;
 
     @Column (nullable = true)
@@ -33,7 +33,12 @@ public class Member {
     @Column (nullable = false)
     private String password;
 
-    @Transient
-    private String passwordCheck;
+    public Member(String email, String githubId, String username, String introduce, String password) {
+        this.email = email;
+        this.githubId = githubId;
+        this.username = username;
+        this.introduce = introduce;
+        this.password =password;
+    }
 
 }
