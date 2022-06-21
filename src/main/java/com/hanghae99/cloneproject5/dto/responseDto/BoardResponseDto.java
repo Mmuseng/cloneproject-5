@@ -1,4 +1,4 @@
-package com.hanghae99.cloneproject5.dto;
+package com.hanghae99.cloneproject5.dto.responseDto;
 
 import com.hanghae99.cloneproject5.model.Board;
 import lombok.Getter;

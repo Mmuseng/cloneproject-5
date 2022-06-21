@@ -1,8 +1,8 @@
 package com.hanghae99.cloneproject5.service;
 
-import com.hanghae99.cloneproject5.dto.BoardRequestDto;
-import com.hanghae99.cloneproject5.dto.BoardResponseDto;
-import com.hanghae99.cloneproject5.dto.BoardUpdateDto;
+import com.hanghae99.cloneproject5.dto.requestDto.BoardRequestDto;
+import com.hanghae99.cloneproject5.dto.responseDto.BoardResponseDto;
+import com.hanghae99.cloneproject5.dto.requestDto.BoardUpdateDto;
 import com.hanghae99.cloneproject5.model.Board;
 import com.hanghae99.cloneproject5.model.Tag;
 import com.hanghae99.cloneproject5.repository.BoardRepository;

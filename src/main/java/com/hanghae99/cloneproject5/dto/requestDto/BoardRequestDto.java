@@ -1,4 +1,4 @@
-package com.hanghae99.cloneproject5.dto;
+package com.hanghae99.cloneproject5.dto.requestDto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,8 +7,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BoardUpdateDto {
+public class BoardRequestDto {
+
     private String title;
     private String content;
     private String contentSummary;
+
+    private String tagStrings;
+
 }

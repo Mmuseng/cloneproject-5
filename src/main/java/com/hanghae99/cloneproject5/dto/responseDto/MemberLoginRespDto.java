@@ -1,4 +1,4 @@
-package com.hanghae99.cloneproject5.dto;
+package com.hanghae99.cloneproject5.dto.responseDto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

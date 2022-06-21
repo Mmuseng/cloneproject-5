@@ -1,6 +1,6 @@
 package com.hanghae99.cloneproject5.validation;
 
-import com.hanghae99.cloneproject5.dto.commentDto.CommentRequestDto;
+import com.hanghae99.cloneproject5.dto.requestDto.CommentRequestDto;
 
 public class CommentValidation {
     public static void validationCommentRegister(CommentRequestDto registerDto) {

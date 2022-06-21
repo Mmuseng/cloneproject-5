@@ -1,4 +1,4 @@
-package com.hanghae99.cloneproject5.dto.likeDto;
+package com.hanghae99.cloneproject5.dto.requestDto;
 
 import lombok.Getter;
 

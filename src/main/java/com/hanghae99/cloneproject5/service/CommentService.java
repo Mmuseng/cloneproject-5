@@ -1,11 +1,9 @@
 package com.hanghae99.cloneproject5.service;
 
-import com.hanghae99.cloneproject5.dto.commentDto.CommentRequestDto;
-import com.hanghae99.cloneproject5.dto.commentDto.CommentResponseDto;
-import com.hanghae99.cloneproject5.dto.commentDto.CreateCommentResponseDto;
+import com.hanghae99.cloneproject5.dto.requestDto.CommentRequestDto;
+import com.hanghae99.cloneproject5.dto.responseDto.CommentResponseDto;
 import com.hanghae99.cloneproject5.model.Board;
 import com.hanghae99.cloneproject5.model.Comment;
-import com.hanghae99.cloneproject5.model.Member;
 import com.hanghae99.cloneproject5.repository.BoardRepository;
 import com.hanghae99.cloneproject5.repository.CommentRepository;
 import com.hanghae99.cloneproject5.repository.MemberRepository;

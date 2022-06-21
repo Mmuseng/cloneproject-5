@@ -1,6 +1,6 @@
 package com.hanghae99.cloneproject5.service;
 
-import com.hanghae99.cloneproject5.dto.likeDto.LikeDto;
+import com.hanghae99.cloneproject5.dto.requestDto.LikeDto;
 import com.hanghae99.cloneproject5.model.Board;
 import com.hanghae99.cloneproject5.model.Like;
 import com.hanghae99.cloneproject5.model.Member;
