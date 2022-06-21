@@ -4,7 +4,9 @@ import com.hanghae99.cloneproject5.dto.requestDto.BoardRequestDto;
 import com.hanghae99.cloneproject5.dto.responseDto.BoardResponseDto;
 import com.hanghae99.cloneproject5.dto.requestDto.BoardUpdateDto;
 import com.hanghae99.cloneproject5.model.Board;
+import com.hanghae99.cloneproject5.model.Member;
 import com.hanghae99.cloneproject5.model.Tag;
+import com.hanghae99.cloneproject5.model.TokenDecode;
 import com.hanghae99.cloneproject5.repository.BoardRepository;
 import com.hanghae99.cloneproject5.repository.MemberRepository;
 import com.hanghae99.cloneproject5.repository.TagRepository;
@@ -24,16 +26,17 @@ public class BoardService {
     private final TagRepository tagRepository;
     
     @Transactional // 게시글 등록
-    public void registerBoard(BoardRequestDto requestDto, String username) {
-//        Member member = memberRepository.findByUsername(username).orElse(null);
+    public void registerBoard(BoardRequestDto requestDto, TokenDecode decode) {
+        String username = decode.getUsername();
+        Member member = memberRepository.findByUsername(username).orElse(null);
             Tag tag = new Tag(requestDto.getTagStrings());
             tagRepository.save(tag);
-            if ( !username.equals("") && tag.getNameList().size() != 0){
-                Board board = new Board(requestDto, username);
+            if ( member != null && tag.getNameList().size() != 0){
+                Board board = new Board(requestDto, member);
                 board.setTagString(requestDto.getTagStrings());
                 boardRepository.save(board);
-            }else if (!username.equals("")){
-                Board board = new Board(requestDto, username);
+            }else if (member != null){
+                Board board = new Board(requestDto, member);
                 boardRepository.save(board);
             }else{
             throw new IllegalArgumentException("조회된 회원이 없습니다.");

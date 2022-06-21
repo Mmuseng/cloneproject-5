@@ -4,10 +4,12 @@ import com.hanghae99.cloneproject5.dto.requestDto.BoardRequestDto;
 import com.hanghae99.cloneproject5.dto.responseDto.BoardResponseDto;
 import com.hanghae99.cloneproject5.dto.requestDto.BoardUpdateDto;
 import com.hanghae99.cloneproject5.model.Board;
+import com.hanghae99.cloneproject5.model.TokenDecode;
 import com.hanghae99.cloneproject5.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -18,11 +20,12 @@ public class BoardController {
 
     //게시글 등록
     @PostMapping("/boards")
-    public void registerBoard(@RequestBody BoardRequestDto requestDto){
+    public void registerBoard(HttpServletRequest httpRequest, @RequestBody BoardRequestDto requestDto){
         // 시큐리티 연동 후 변경
+        TokenDecode decode = (TokenDecode) httpRequest.getAttribute("decode");
         String username = "username";
 
-        boardService.registerBoard(requestDto, username);
+        boardService.registerBoard(requestDto, decode);
 
     }
 

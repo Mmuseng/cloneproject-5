@@ -50,12 +50,14 @@ public class Board extends Timestamp {
 
         this.username = username;
     }
-    public Board(BoardRequestDto requestDto, String username){
+    public Board(BoardRequestDto requestDto, Member member){
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.contentSummary = requestDto.getContentSummary();
 
-        this.username = username;
+        // 게시글 작성자 추가
+        this.member = member;
+        this.username = member.getUsername();
     }
 
     public void update(BoardUpdateDto updateDto) {
