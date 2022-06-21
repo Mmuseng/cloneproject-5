@@ -25,5 +25,6 @@ replay_pid*
 
 
 application.properties
+application-db.properties
 src/main/resources/application.properties
 *.properties
