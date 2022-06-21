@@ -23,13 +23,13 @@ public class Board extends Timestamp {
     @Column (nullable = false)
     private String title;
 
-    @Column (nullable = false)
+    @Column (nullable = false, length = 2000)
     private String content;
 
-    @Column (nullable = true)
+    @Column (nullable = true, length = 2000)
     private String contentSummary;
 
-    @Column (nullable = true)
+    @Column (nullable = true, length = 2000)
     private String imgPath;
 
     @JsonIgnore
