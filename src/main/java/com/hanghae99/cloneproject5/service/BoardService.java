@@ -27,8 +27,7 @@ public class BoardService {
     
     @Transactional // 게시글 등록
     public void registerBoard(BoardRequestDto requestDto, TokenDecode decode) {
-        String username = decode.getUsername();
-        Member member = memberRepository.findByUsername(username).orElse(null);
+        Member member = memberRepository.findById(decode.getId()).orElse(null);
             Tag tag = new Tag(requestDto.getTagStrings());
             tagRepository.save(tag);
             if ( member != null && tag.getNameList().size() != 0){
@@ -63,17 +62,31 @@ public class BoardService {
     }
 
     // 게시글 수정
-    public void updateBoard(Long id, BoardUpdateDto updateDto) {
+    public void updateBoard(Long id, BoardUpdateDto updateDto, TokenDecode decode) {
         Board board = boardRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글은 존재하지 않습니다.")
         );
 
-        board.update(updateDto);
-        boardRepository.save(board);
+        if ( decode.getId().equals(board.getMember().getId())){
+            board.update(updateDto);
+            boardRepository.save(board);
+        }else{
+            throw new IllegalArgumentException("본인의 게시글만 수정할 수 있습니다.");
+        }
+
     }
 
     // 게시글 삭제
-    public void deleteBoard(Long id) {
-        boardRepository.deleteById(id);
+    public void deleteBoard(Long id, TokenDecode decode) {
+        Board board = boardRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("해당 게시글은 존재하지 않습니다.")
+        );
+        if ( decode.getId().equals(board.getMember().getId())){
+            boardRepository.deleteById(id);
+        }else{
+            throw new IllegalArgumentException("본인의 게시글만 삭제할 수 있습니다.");
+        }
+
+
     }
 }

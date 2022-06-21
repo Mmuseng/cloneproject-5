@@ -43,13 +43,15 @@ public class BoardController {
 
     // 게시글 수정
     @PutMapping("/boards/{id}")
-    public void updateBoard(@PathVariable Long id, @RequestBody BoardUpdateDto updateDto){
-        boardService.updateBoard(id, updateDto);
+    public void updateBoard(HttpServletRequest httpRequest, @PathVariable Long id, @RequestBody BoardUpdateDto updateDto){
+        TokenDecode decode = (TokenDecode) httpRequest.getAttribute("decode");
+        boardService.updateBoard(id, updateDto, decode);
     }
 
     // 게시글 삭제
     @DeleteMapping("/boards/{id}")
-    public void deleteBoard(@PathVariable Long id) {
-        boardService.deleteBoard(id);
+    public void deleteBoard(HttpServletRequest httpRequest, @PathVariable Long id) {
+        TokenDecode decode = (TokenDecode) httpRequest.getAttribute("decode");
+        boardService.deleteBoard(id, decode);
     }
 }
