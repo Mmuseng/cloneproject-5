@@ -80,6 +80,7 @@ public class CommentService {
         List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
         for (Comment comment : commentList) {
             CommentResponseDto commentResponseDto = new CommentResponseDto();
+            commentResponseDto.setId(comment.getId());
             commentResponseDto.setContent(comment.getContent());
             commentResponseDto.setUsername(comment.getMember().getUsername());
             commentResponseDto.setCreatedAt(comment.getCreatedAt());
