@@ -2,6 +2,7 @@ package com.hanghae99.cloneproject5.controller;
 
 import com.hanghae99.cloneproject5.dto.requestDto.CommentRequestDto;
 import com.hanghae99.cloneproject5.dto.responseDto.CommentResponseDto;
+import com.hanghae99.cloneproject5.dto.responseDto.CreateCommentResponseDto;
 import com.hanghae99.cloneproject5.model.TokenDecode;
 import com.hanghae99.cloneproject5.service.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +17,15 @@ public class CommentController {
 
     private final CommentService commentService;
 
-//    @PostMapping("/comments/{boardId}")
-//    public CreateCommentResponseDto createComment(@PathVariable Long boardId, @RequestBody CommentRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    // 댓글 작성
+    @PostMapping("/comments/{boardId}")
+    public CreateCommentResponseDto createComment(@PathVariable Long boardId,
+                                @RequestBody CommentRequestDto requestDto,
+                                HttpServletRequest httpRequest) {
 
-//        return commentService.createComment(boardId, requestDto, userDetails);
-//    }
+        TokenDecode decode = (TokenDecode) httpRequest.getAttribute("decode");
+        return commentService.createComment(boardId, requestDto, decode);
+    }
 
     // 댓글 조회
     @GetMapping("/comments/{boardId}")
@@ -31,7 +36,9 @@ public class CommentController {
 
     // 댓글 수정
     @PutMapping("/comments/update/{commentid}")
-    public String updateComment(@PathVariable Long commentId, @RequestBody CommentRequestDto requestDto, HttpServletRequest httpRequest) {
+    public String updateComment(@PathVariable Long commentId,
+                                @RequestBody CommentRequestDto requestDto,
+                                HttpServletRequest httpRequest) {
 
         TokenDecode decode = (TokenDecode) httpRequest.getAttribute("decode");
         return commentService.updateComment(commentId, requestDto, decode);
@@ -39,8 +46,10 @@ public class CommentController {
 
     // 댓글 삭제
     @DeleteMapping("/comments/{commentid}")
-    public void deleteComment(@PathVariable Long commentId){
+    public String deleteComment(@PathVariable Long commentId,
+                              HttpServletRequest httpRequest) {
 
-        commentService.deleteComment(commentId);
+        TokenDecode decode = (TokenDecode) httpRequest.getAttribute("decode");
+        return commentService.deleteComment(commentId, decode);
     }
 }

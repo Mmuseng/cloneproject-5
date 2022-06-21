@@ -57,13 +57,20 @@ public class CommentService {
             commentRepository.save(comment);
             return "댓글이 수정 되었습니다.";
         } else {
-            return "다른 사람의 댓글입니다";
+            return "다른 사람의 댓글입니다.";
         }
     }
 
-    public void deleteComment(Long commentId) {
-        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("ID를 찾을 수 없습니다."));
-        commentRepository.delete(comment);
+    public String deleteComment(Long commentId, TokenDecode decode) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(
+                () -> new IllegalArgumentException("ID를 찾을 수 없습니다.")
+        );
+        if (comment.getMember().getId().equals(decode.getId())) {
+            commentRepository.deleteById(commentId);
+            return "댓글이 삭제되었습니다.";
+        } else {
+            return "다른 사람의 댓글입니다.";
+        }
     }
 
     public List<CommentResponseDto> getComment(Long boardId) {
