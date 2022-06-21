@@ -29,13 +29,13 @@ public class BoardController {
     }
 
     // 게시글 전체 조회
-    @GetMapping("/boards")
+    @GetMapping("/viewboards")
     public List<BoardResponseDto> getAllBoard(){
         return boardService.getAllBoard();
     }
 
     // 게시글 상세 조회
-    @GetMapping("/boards/{id}")
+    @GetMapping("/viewboards/{id}")
     public Board getBoardDetail(@PathVariable Long id){
         return boardService.getBoardDetail(id);
     }
