@@ -2,8 +2,11 @@ package com.hanghae99.cloneproject5.service;
 
 import com.hanghae99.cloneproject5.dto.requestDto.CommentRequestDto;
 import com.hanghae99.cloneproject5.dto.responseDto.CommentResponseDto;
+import com.hanghae99.cloneproject5.dto.responseDto.CreateCommentResponseDto;
 import com.hanghae99.cloneproject5.model.Board;
 import com.hanghae99.cloneproject5.model.Comment;
+import com.hanghae99.cloneproject5.model.Member;
+import com.hanghae99.cloneproject5.model.TokenDecode;
 import com.hanghae99.cloneproject5.repository.BoardRepository;
 import com.hanghae99.cloneproject5.repository.CommentRepository;
 import com.hanghae99.cloneproject5.repository.MemberRepository;
@@ -24,39 +27,38 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final MemberRepository memberRepository;
 
-//    public CommentRegisterResponseDto createComment(Long boardId, CommentRegisterDto requestDto, UserDetailsImpl userDetails) {
-//        Board board = boardRepository.findById(boardId).orElseThrow(() -> new NullPointerException("registerComment ID를 찾을 수 없습니다."));
-//        CommentValidation.validationCommentRegister(requestDto);
-//
-//        Member member = memberRepository.findById(userDetails.getUser().getId()).orElseThrow(("createComment ID 오류"));
-//        Comment comment = new Comment(requestDto.getContent, board, member);
-//        commentRepository.save(comment);
-//
-//        CreateCommentResponseDto commentResponseDto = new CreateCommentResponseDto();
-//        commentResponseDto.setComment_Id(comment.getId());
-//        commentResponseDto.setCreatedAt(comment.getCreatedAt());
-//
-//        return commentResponseDto;
-//    }
+    // 댓글 작성 로직
+    public CreateCommentResponseDto createComment(Long boardId, CommentRequestDto requestDto, TokenDecode decode) {
+        Board board = boardRepository.findById(boardId).orElseThrow(() -> new NullPointerException("registerComment ID를 찾을 수 없습니다."));
+        CommentValidation.validationCommentRegister(requestDto);
 
+        Member member = memberRepository.findById(decode.getId()).orElseThrow(
+                () -> new NullPointerException("해당 유저가 존재하지 않습니다.")
+        );
+
+        Comment comment = new Comment(requestDto.getContent(), board, member);
+        commentRepository.save(comment);
+
+        CreateCommentResponseDto commentResponseDto = new CreateCommentResponseDto();
+        commentResponseDto.setComment_Id(comment.getId());
+        commentResponseDto.setCreatedAt(comment.getCreatedAt());
+
+        return commentResponseDto;
+    }
+
+    // 댓글 수정 로직
     @Transactional
-    public void updateComment(Long commentId, CommentRequestDto registerDto) {
+    public String updateComment(Long commentId, CommentRequestDto requestDto, TokenDecode decode) {
 
-        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("updateComment ID를 찾을 수 없습니다."));
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 댓글이 존재하지 않습니다."));
 
-        Optional<Board> board = boardRepository.findById(comment.getBoard().getId());
-
-        if (!board.isPresent()) {
-            try {
-                throw new IllegalAccessException("해당 게시글이 없습니다.");
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
+        if (comment.getMember().getId().equals(decode.getId())) {
+            comment.setContent(requestDto.getContent());
+            commentRepository.save(comment);
+            return "댓글이 수정 되었습니다.";
+        } else {
+            return "다른 사람의 댓글입니다";
         }
-
-        CommentValidation.validationCommentRegister(registerDto);
-
-        comment.update(registerDto);
     }
 
     public void deleteComment(Long commentId) {

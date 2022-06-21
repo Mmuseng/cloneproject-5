@@ -2,10 +2,12 @@ package com.hanghae99.cloneproject5.controller;
 
 import com.hanghae99.cloneproject5.dto.requestDto.CommentRequestDto;
 import com.hanghae99.cloneproject5.dto.responseDto.CommentResponseDto;
+import com.hanghae99.cloneproject5.model.TokenDecode;
 import com.hanghae99.cloneproject5.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -29,9 +31,10 @@ public class CommentController {
 
     // 댓글 수정
     @PutMapping("/comments/update/{commentid}")
-    public void updateComment(@PathVariable Long commentId, @RequestBody CommentRequestDto requestDto) {
+    public String updateComment(@PathVariable Long commentId, @RequestBody CommentRequestDto requestDto, HttpServletRequest httpRequest) {
 
-        commentService.updateComment(commentId, requestDto);
+        TokenDecode decode = (TokenDecode) httpRequest.getAttribute("decode");
+        return commentService.updateComment(commentId, requestDto, decode);
     }
 
     // 댓글 삭제
