@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,18 @@ public class Tag { // 고민해봅시다.
     private Long id;
 
     @OneToMany(mappedBy = "tagName")
-    private List<TagName> nameList;
+    private List<TagName> nameList = new ArrayList<>();
+
+    public Tag(String tagStrings){
+        if(tagStrings.equals("")){
+            return;
+        }
+        String[] tagNames = tagStrings.split(",");
+
+        for(String name : tagNames){
+            TagName tagName = new TagName(name);
+            this.nameList.add(tagName);
+        }
+    }
 
 }
