@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="velogclone" uuid="885670b9-ecd9-499e-8c32-da760aebfb72">
+    <data-source source="LOCAL" name="velogclone5@velogclone5.cylel7jtbu1v.ap-northeast-2.rds.amazonaws.com" uuid="f6eecba7-0c25-4339-8c7a-23596a6a04e1">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://velogclone.cylel7jtbu1v.ap-northeast-2.rds.amazonaws.com:3306/velogclone</jdbc-url>
+      <jdbc-url>jdbc:mysql://velogclone5.cylel7jtbu1v.ap-northeast-2.rds.amazonaws.com:3306/velogclone5</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

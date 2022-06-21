@@ -28,7 +28,7 @@ public class CommentController {
     }
 
     // 댓글 조회
-    @GetMapping("/comments/{boardId}")
+    @GetMapping("/viewcomments/{boardId}")
     public List<CommentResponseDto> getComments(@PathVariable Long boardId) {
 
         return commentService.getComment(boardId);
