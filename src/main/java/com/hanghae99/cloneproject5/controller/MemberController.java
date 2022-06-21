@@ -23,6 +23,7 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    // 토큰 테스트
     @GetMapping("/user/tokentest")
     public MemberTokenRespDto tokenTest(@RequestHeader("Authorization") String authorization) {
         if (!authorization.startsWith("Bearer "))
@@ -33,36 +34,42 @@ public class MemberController {
         return memberService.tokenTest(token);
     }
 
+    // 토큰 재발급
     @PostMapping("/user/refresh")
     public MemberLoginRespDto tokenRefresh(@RequestBody RefreshTokenDto Dto) {
 
         return memberService.verifyRefreshToken(Dto.getAccessToken(), Dto.getRefreshToken());
     }
 
+    // 유저 로그인 페이지
     @GetMapping("/user/login")
     public String login() {
 
         return "login";
     }
 
+    // 로그인 요청 처리
     @PostMapping("/user/login")
     public MemberLoginRespDto login(@RequestBody SignInDto Dto) throws NoSuchAlgorithmException {
 
         return memberService.loginUser(Dto);
     }
 
+    // 유저 회원가입 페이지
     @GetMapping("/user/signup")
     public String signup() {
 
         return "signup";
     }
 
+    // 회원가입 요청 처리
     @PostMapping("/user/signup")
     public MemberRegisterRespDto registerMember(@RequestBody SignUpDto Dto) throws NoSuchAlgorithmException {
 
         return memberService.registerUser(Dto);
     }
 
+    // username 중복 확인
     @ResponseBody
     @GetMapping("/user/nameDupCheck/{username}")
     public Boolean nameDupCheck(@PathVariable String username) {
