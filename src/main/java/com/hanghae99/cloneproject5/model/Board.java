@@ -1,7 +1,7 @@
 package com.hanghae99.cloneproject5.model;
 
-import com.hanghae99.cloneproject5.dto.BoardRequestDto;
-import com.hanghae99.cloneproject5.dto.BoardUpdateDto;
+import com.hanghae99.cloneproject5.dto.requestDto.BoardRequestDto;
+import com.hanghae99.cloneproject5.dto.requestDto.BoardUpdateDto;
 import com.hanghae99.cloneproject5.util.Timestamp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

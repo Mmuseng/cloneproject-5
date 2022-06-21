@@ -1,6 +1,6 @@
 package com.hanghae99.cloneproject5.model;
 
-import com.hanghae99.cloneproject5.dto.commentDto.CommentRequestDto;
+import com.hanghae99.cloneproject5.dto.requestDto.CommentRequestDto;
 import com.hanghae99.cloneproject5.util.Timestamp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

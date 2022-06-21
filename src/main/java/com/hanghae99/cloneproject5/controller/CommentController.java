@@ -1,8 +1,7 @@
 package com.hanghae99.cloneproject5.controller;
 
-import com.hanghae99.cloneproject5.dto.commentDto.CommentRequestDto;
-import com.hanghae99.cloneproject5.dto.commentDto.CommentResponseDto;
-import com.hanghae99.cloneproject5.dto.commentDto.CreateCommentResponseDto;
+import com.hanghae99.cloneproject5.dto.requestDto.CommentRequestDto;
+import com.hanghae99.cloneproject5.dto.responseDto.CommentResponseDto;
 import com.hanghae99.cloneproject5.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

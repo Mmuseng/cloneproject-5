@@ -6,7 +6,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hanghae99.cloneproject5.dto.MemberTokenRespDto;
+import com.hanghae99.cloneproject5.dto.responseDto.MemberTokenRespDto;
 import com.hanghae99.cloneproject5.model.TokenDecode;
 import org.springframework.stereotype.Component;
 

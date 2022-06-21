@@ -1,10 +1,12 @@
 package com.hanghae99.cloneproject5.controller;
 
-import com.hanghae99.cloneproject5.dto.*;
-import com.hanghae99.cloneproject5.model.Board;
+import com.hanghae99.cloneproject5.dto.requestDto.RefreshTokenDto;
+import com.hanghae99.cloneproject5.dto.requestDto.SignInDto;
+import com.hanghae99.cloneproject5.dto.requestDto.SignUpDto;
+import com.hanghae99.cloneproject5.dto.responseDto.MemberLoginRespDto;
+import com.hanghae99.cloneproject5.dto.responseDto.MemberRegisterRespDto;
+import com.hanghae99.cloneproject5.dto.responseDto.MemberTokenRespDto;
 import com.hanghae99.cloneproject5.service.MemberService;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
