@@ -1,6 +1,7 @@
 package com.hanghae99.cloneproject5.controller;
 
 import com.hanghae99.cloneproject5.dto.requestDto.LikeDto;
+import com.hanghae99.cloneproject5.model.TokenDecode;
 import com.hanghae99.cloneproject5.service.LikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

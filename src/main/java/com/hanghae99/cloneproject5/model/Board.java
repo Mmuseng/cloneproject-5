@@ -40,6 +40,9 @@ public class Board extends Timestamp {
     @Column
     private String tagString;
 
+    @Column
+    private Long likesCnt;
+
     public Board(BoardRequestDto requestDto, String username, Tag tag){
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
