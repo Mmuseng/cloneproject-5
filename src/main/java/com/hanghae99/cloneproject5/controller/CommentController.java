@@ -35,7 +35,7 @@ public class CommentController {
     }
 
     // 댓글 수정
-    @PutMapping("/comments/update/{commentid}")
+    @PutMapping("/comments/update/{commentId}")
     public String updateComment(@PathVariable Long commentId,
                                 @RequestBody CommentRequestDto requestDto,
                                 HttpServletRequest httpRequest) {
@@ -45,7 +45,7 @@ public class CommentController {
     }
 
     // 댓글 삭제
-    @DeleteMapping("/comments/{commentid}")
+    @DeleteMapping("/comments/{commentId}")
     public String deleteComment(@PathVariable Long commentId,
                               HttpServletRequest httpRequest) {
 
