@@ -12,7 +12,7 @@ public class BoardRequestDto {
     private String title;
     private String content;
     private String contentSummary;
-
+    private String imagePath;
     private String tagStrings;
 
 }

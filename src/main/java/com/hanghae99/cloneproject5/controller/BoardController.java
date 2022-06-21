@@ -23,7 +23,6 @@ public class BoardController {
     public void registerBoard(HttpServletRequest httpRequest, @RequestBody BoardRequestDto requestDto){
         // 시큐리티 연동 후 변경
         TokenDecode decode = (TokenDecode) httpRequest.getAttribute("decode");
-        String username = "username";
 
         boardService.registerBoard(requestDto, decode);
 

@@ -1,5 +1,6 @@
 package com.hanghae99.cloneproject5.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hanghae99.cloneproject5.dto.requestDto.BoardRequestDto;
 import com.hanghae99.cloneproject5.dto.requestDto.BoardUpdateDto;
 import com.hanghae99.cloneproject5.util.Timestamp;
@@ -31,6 +32,7 @@ public class Board extends Timestamp {
     @Column (nullable = true)
     private String imgPath;
 
+    @JsonIgnore
     @ManyToOne
     private Member member;
 
@@ -54,6 +56,7 @@ public class Board extends Timestamp {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.contentSummary = requestDto.getContentSummary();
+        this.imgPath = requestDto.getImagePath();
 
         // 게시글 작성자 추가
         this.member = member;
