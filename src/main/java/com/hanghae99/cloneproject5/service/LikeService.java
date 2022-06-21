@@ -22,7 +22,8 @@ public class LikeService {
     private final LikeRepository likeRepository;
 
     @Transactional
-    public void uplike(TokenDecode decode, Long boardId, LikeDto behavior) {
+    public void uplike(TokenDecode decode,
+                       Long boardId, LikeDto behavior) {
 
         Member member = memberRepository.findById(decode.getId()).orElseThrow(
                 () -> new NullPointerException("해당 유저가 존재하지 않습니다.")
