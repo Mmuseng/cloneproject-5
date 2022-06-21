@@ -82,6 +82,7 @@ public class CommentService {
             CommentResponseDto commentResponseDto = new CommentResponseDto();
             commentResponseDto.setContent(comment.getContent());
             commentResponseDto.setUsername(comment.getMember().getUsername());
+            commentResponseDto.setCreatedAt(comment.getCreatedAt());
             commentResponseDtoList.add(commentResponseDto);
         }
 
