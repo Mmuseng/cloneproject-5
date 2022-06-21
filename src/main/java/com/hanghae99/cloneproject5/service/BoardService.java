@@ -3,6 +3,7 @@ package com.hanghae99.cloneproject5.service;
 import com.hanghae99.cloneproject5.dto.requestDto.BoardRequestDto;
 import com.hanghae99.cloneproject5.dto.responseDto.BoardResponseDto;
 import com.hanghae99.cloneproject5.dto.requestDto.BoardUpdateDto;
+import com.hanghae99.cloneproject5.dto.responseDto.BoardResponseDtoByTag;
 import com.hanghae99.cloneproject5.model.Board;
 import com.hanghae99.cloneproject5.model.Member;
 import com.hanghae99.cloneproject5.model.Tag;
@@ -86,7 +87,20 @@ public class BoardService {
         }else{
             throw new IllegalArgumentException("본인의 게시글만 삭제할 수 있습니다.");
         }
+    }
 
+    // Tag를 포함한 Board 전체 조회
+    public List<BoardResponseDtoByTag> getBoardByTag(String tag) {
+        List<Board> boardList = boardRepository.findAll();
+        List<BoardResponseDtoByTag> responseDtoByTagList = new ArrayList<>();
 
+        for (Board board : boardList) {
+            if ( board.getTagString().contains(tag)){
+                BoardResponseDtoByTag boardResponseDtoByTag = new BoardResponseDtoByTag(board);
+                responseDtoByTagList.add(boardResponseDtoByTag);
+            }
+        }
+
+        return responseDtoByTagList;
     }
 }
