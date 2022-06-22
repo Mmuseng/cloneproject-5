@@ -15,14 +15,14 @@ public class BoardResponseDto {
     private Long id;
     private String title;
     private String contentSummary;
-    private String thumbnail;
+    private String imgPath;
     private LocalDateTime date;
 
     public BoardResponseDto(Board board){
         this.id = board.getId();
         this.title = board.getTitle();
         this.contentSummary = board.getContentSummary();
-        this.thumbnail = board.getImgPath();
+        this.imgPath = board.getImgPath();
         this.date = board.getModifiedAt();
     }
     

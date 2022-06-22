@@ -56,7 +56,7 @@ public class Board extends Timestamp {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.contentSummary = requestDto.getContentSummary();
-        this.imgPath = requestDto.getImagePath();
+        this.imgPath = requestDto.getImgPath();
 
         // 게시글 작성자 추가
         this.member = member;
