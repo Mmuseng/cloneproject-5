@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 public class BoardResponseDtoByTag {
     private Long id;
     private String title;
+    private String username;
     private String contentSummary;
     private String thumbnail;
     private LocalDateTime date;
@@ -20,6 +21,7 @@ public class BoardResponseDtoByTag {
     public BoardResponseDtoByTag(Board board) {
         this.id = board.getId();
         this.title = board.getTitle();
+        this.username = board.getUsername();
         this.contentSummary = board.getContentSummary();
         this.thumbnail = board.getImgPath();
         this.date = board.getModifiedAt();

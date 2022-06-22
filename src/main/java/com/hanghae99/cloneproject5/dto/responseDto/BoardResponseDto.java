@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 public class BoardResponseDto {
     // id date -> 수정됨 프론트와 협의하기
     private Long id;
+    private String username;
     private String title;
     private String contentSummary;
     private String imgPath;
@@ -21,6 +22,7 @@ public class BoardResponseDto {
     public BoardResponseDto(Board board){
         this.id = board.getId();
         this.title = board.getTitle();
+        this.username = board.getUsername();
         this.contentSummary = board.getContentSummary();
         this.imgPath = board.getImgPath();
         this.date = board.getModifiedAt();
