@@ -30,7 +30,7 @@
 > 3) 댓글 CRUD
  +댓글 등록, 댓글 수정, 댓글 삭제
 # :tv: 데모영상
-<img src="https://img.shields.io/badge/YouTube-FF0000?style=flat&logo=YouTube&logoColor=white"/>
+<img src="https://img.shields.io/badge/YouTube-FF0000?style=flat&logo=YouTube&logoColor=white"/> https://youtu.be/9Lq_gonPokw
 
 # :computer: 기술 스택 
 #### Server 
