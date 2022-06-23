@@ -9,6 +9,7 @@ import com.hanghae99.cloneproject5.model.Member;
 import com.hanghae99.cloneproject5.model.Tag;
 import com.hanghae99.cloneproject5.model.TokenDecode;
 import com.hanghae99.cloneproject5.repository.BoardRepository;
+import com.hanghae99.cloneproject5.repository.CommentRepository;
 import com.hanghae99.cloneproject5.repository.MemberRepository;
 import com.hanghae99.cloneproject5.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import java.util.List;
 @Service
 public class BoardService {
 
+    private final CommentRepository commentRepository;
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
     private final TagRepository tagRepository;
@@ -78,11 +80,14 @@ public class BoardService {
     }
 
     // 게시글 삭제
+    @Transactional
     public void deleteBoard(Long id, TokenDecode decode) {
         Board board = boardRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글은 존재하지 않습니다.")
         );
+
         if ( decode.getId().equals(board.getMember().getId())){
+            commentRepository.deleteAllByBoardId(id);
             boardRepository.deleteById(id);
         }else{
             throw new IllegalArgumentException("본인의 게시글만 삭제할 수 있습니다.");
