@@ -159,14 +159,14 @@ public class MemberService {
 
         // 회원 Email 중복 확인
         if (foundEmail.isPresent()) {
-            err_msg = "중복된 사용자 ID가 존재합니다.";
+            err_msg = "중복된 사용자 Email이 존재합니다.";
             result = false;
             return new MemberRegisterRespDto(result, err_msg);
         }
 
         // 회원 닉네임 중복 확인
         if (foundUsername.isPresent()) {
-            err_msg = "중복된 닉네임이 존재합니다.";
+            err_msg = "중복된 사용자 이름이 존재합니다.";
             result = false;
             return new MemberRegisterRespDto(result, err_msg);
         }
